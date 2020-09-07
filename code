@@ -1,0 +1,24 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn import datasets, linear_model
+
+df=pd.read_csv("Housing.csv")
+x=df['lotsize']
+y=df['price']
+x=x.values.reshape(len(x),1)
+y=y.values.reshape(len(y),1)
+x_train=x[:-250]
+x_test=x[-250:]
+y_train=y[:-250]
+y_test=y[-250:]
+plt.scatter(x_test,y_test,color="blue")
+plt.xlabel("Plot_Size")
+plt.ylabel("Price")
+plt.title("House_Price_Prediction_Graph")
+
+regr=linear_model.LinearRegression()
+regr.fit(x_train,y_train)
+plt.plot(x_test,regr.predict(x_test),color="red",linewidth=3)
+plt.show()
+
